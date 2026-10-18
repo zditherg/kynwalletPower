@@ -1,0 +1,19 @@
+.toast {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 16px;
+  border-radius: var(--radius-control);
+  background: var(--neutral-900);
+  color: var(--neutral-0);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(22, 24, 44, 0.18);
+  max-width: 100%;
+}
+
+.text {
+  overflow-wrap: anywhere;
+}
