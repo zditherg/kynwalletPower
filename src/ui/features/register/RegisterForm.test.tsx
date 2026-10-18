@@ -242,7 +242,10 @@ describe('RegisterForm · US3 Notificación Toast "Próximamente" en Google y Ap
 
       await user.click(screen.getByRole('button', { name: provider }));
 
-      expect(screen.getByRole('status')).toHaveTextContent('Próximamente');
+      const toast = screen.getByRole('status');
+      expect(toast).toHaveTextContent('Próximamente');
+      expect(toast).toHaveAttribute('data-position', 'top-center');
+      expect(toast).toHaveAttribute('data-tone', 'brand');
       expect(fullName).toHaveValue('Ana Gómez');
       expect(email).toHaveValue('ana@example.test');
     },

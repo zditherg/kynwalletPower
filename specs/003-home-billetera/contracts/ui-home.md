@@ -9,6 +9,7 @@ Contrato observable por el usuario y por las pruebas automatizadas (React Testin
 | Contenedor raíz del Home | `[data-view="home"]` | En Desktop (`≥ 960px`) distribuye 2 paneles (barra lateral izquierda + panel principal derecho); en Mobile (`< 960px`) presenta 1 solo panel vertical centrado sin distorsión al redimensionar (FR-002) |
 | Navegación principal | `navigation` `"Navegación principal"` | Contiene los botones `"Inicio"` (`aria-current="page"`), `"Movimientos"`, `"Tarjetas"` y `"Mi Perfil"` |
 | Opciones secundarias (`Movimientos`, `Tarjetas`, `Mi Perfil`) | `button` `"Movimientos"`, `button` `"Tarjetas"`, `button` `"Mi Perfil"` | Al hacer clic muestran exclusivamente un **Toast Alert** (`role="status"`) con el texto `"Próximamente"`, sin cambiar de vista ni alterar el estado financiero (FR-011, US4-3) |
+| Notificación Toast (`Toast`) | `status` (`role="status"`, `aria-live="polite"`, `data-position="top-center"`) y `button` `"Cerrar notificación"` | Flotante en la parte superior centrada (`top-center`) estilo `react-toastify`, con fondo de color de la paleta actual (`--brand-700` o `--success-700`), barra de progreso y textos intactos (`"Próximamente"`, `"Operación realizada con éxito"`, `"Datos copiados al portapapeles"`) (FR-013, US4-4) |
 | Saludo principal | `heading` nivel 1 `"¡Bienvenido, {displayName}!"` | Recibe el foco inicial al entrar al Home (`tabIndex={-1}`, FR-001, FR-003) |
 | Cerrar sesión | `button` `"Cerrar sesión"` | Limpia la sesión y regresa al formulario de Login vacío (FR-010) |
 

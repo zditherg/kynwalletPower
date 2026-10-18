@@ -117,23 +117,25 @@ description: "Task list for 003-home-billetera"
 
 ---
 
-## Phase 6: User Story 4 - Diseño único Figma (`13:2`), comportamiento Responsive sin distorsión (Desktop 2 paneles / Mobile solo formulario) y aviso Toast en opciones secundarias (Priority: P1)
+## Phase 6: User Story 4 - Diseño único Figma (`13:2`), comportamiento Responsive sin distorsión (Desktop 2 paneles / Mobile solo formulario) y notificaciones Toast `top-center` estilo `react-toastify` (Priority: P1)
 
-**Goal**: Adoptar exclusivamente el diseño de referencia de Figma (`node-id=13-2`) manteniendo un comportamiento Responsive libre de distorsión — **2 paneles en Desktop (`≥ 960px`: panel lateral + contenido)** y **1 solo panel en Mobile (`< 960px`, desde `320px`: solo formulario/contenido centrado)** — y haciendo que las opciones **`Movimientos`**, **`Tarjetas`** y **`Mi Perfil`** envíen únicamente el mensaje `"Próximamente"` mediante un **Toast Alert**.
+**Goal**: Adoptar exclusivamente el diseño de referencia de Figma (`node-id=13-2`) manteniendo un comportamiento Responsive libre de distorsión — **2 paneles en Desktop (`≥ 960px`: panel lateral + contenido)** y **1 solo panel en Mobile (`< 960px`, desde `320px`: solo formulario/contenido centrado)** — haciendo que las opciones **`Movimientos`**, **`Tarjetas`** y **`Mi Perfil`** envíen únicamente el mensaje `"Próximamente"` mediante un **Toast Alert**, y mostrando todos los mensajes **Toast** flotantes en la **parte superior centrada (`top-center`)** con fondo de color de la paleta actual estilo `react-toastify`.
 
-**Independent Test**: Verificar la navegación principal (`Inicio`, `Movimientos`, `Tarjetas`, `Mi Perfil`), comprobar que al pulsar `Movimientos`, `Tarjetas` y `Mi Perfil` se muestra el Toast Alert `"Próximamente"`, y validar la transición sin distorsión entre Desktop (2 paneles) y Mobile (1 solo panel) (`quickstart.md` escenarios 9 y 10).
+**Independent Test**: Verificar la navegación principal (`Inicio`, `Movimientos`, `Tarjetas`, `Mi Perfil`), comprobar que al pulsar `Movimientos`, `Tarjetas` y `Mi Perfil` se muestra el Toast Alert `"Próximamente"` en `top-center` con fondo de color (`data-position="top-center"`, `data-tone="brand"`), verificar el tono `success` en operaciones confirmadas, y validar la transición sin distorsión entre Desktop (2 paneles) y Mobile (1 solo panel) (`quickstart.md` escenarios 9 y 10).
 
 ### Tests for User Story 4 ⚠️
 
 > **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
 
-- [X] T020 [US4] Ampliar `src/ui/features/home/HomeDashboard.test.tsx` con pruebas para US4-1, US4-2 y US4-3: verifica la región `navigation` `"Navegación principal"` con `"Inicio"` (`aria-current="page"`), `"Movimientos"`, `"Tarjetas"` y `"Mi Perfil"`, y comprueba que pulsar `"Movimientos"`, `"Tarjetas"` y `"Mi Perfil"` muestra el Toast Alert `"Próximamente"` (`role="status"`) sin alterar el saldo ni los movimientos
+- [X] T020 [P] [US4] Ampliar `src/ui/components/Toast/Toast.test.tsx` con pruebas unitarias y de accesibilidad para US4-4 y FR-013: verifica posicionamiento superior centrado (`data-position="top-center"`), tono `brand` (`--brand-700`) para `"Próximamente"`, tono `success` (`--success-700`) para `"Operación realizada con éxito"` y `"Datos copiados al portapapeles"`, cierre manual mediante `"Cerrar notificación"`, autocierre a los `3000 ms` y cero violaciones `axe-core`
+- [X] T021 [P] [US4] Ampliar `src/ui/features/home/HomeDashboard.test.tsx` con pruebas para US4-1, US4-3 y US4-4: verifica la región `navigation` `"Navegación principal"` con `"Inicio"` (`aria-current="page"`), `"Movimientos"`, `"Tarjetas"` y `"Mi Perfil"`, y comprueba que pulsar cada una de las 3 opciones secundarias muestra el Toast Alert superior centrado (`data-position="top-center"`) con `"Próximamente"` sin alterar el saldo ni los movimientos
 
 ### Implementation for User Story 4
 
-- [X] T021 [US4] Implementar el layout responsivo basado exclusivamente en Figma (`13:2`) — Desktop (`≥ 960px`, 2 paneles) y Mobile (`< 960px`, 1 solo panel de contenido/formulario sin distorsión al cambiar de tamaño de pantalla) — en `src/ui/features/home/HomeDashboard.tsx`, `src/ui/features/home/HomeDashboard.module.css` y `src/ui/features/login/LoginScreen.module.css` hasta pasar T020
+- [X] T022 [P] [US4] Actualizar `src/ui/components/Toast/Toast.tsx` y `src/ui/components/Toast/Toast.module.css` para posicionar todas las notificaciones Toast en la parte superior centrada (`top-center`) con comportamiento estilo `react-toastify` (fondo de color `--brand-700` / `--success-700` respetando la paleta actual, icono SVG, botón `"Cerrar notificación"` y barra de progreso animada) manteniendo intactos todos los mensajes establecidos hasta pasar T020
+- [X] T023 [US4] Implementar el layout responsivo basado exclusivamente en Figma (`13:2`) — Desktop (`≥ 960px`, 2 paneles) y Mobile (`< 960px`, 1 solo panel de contenido/formulario sin distorsión al cambiar de tamaño de pantalla) — en `src/ui/features/home/HomeDashboard.tsx`, `src/ui/features/home/HomeDashboard.module.css` y `src/ui/features/login/LoginScreen.module.css` hasta pasar T021
 
-**Checkpoint**: Las 4 historias de usuario están completas y adaptadas al diseño único de Figma (`13:2`) sin distorsiones entre Desktop y Mobile.
+**Checkpoint**: Las 4 historias de usuario y el nuevo comportamiento `top-center` de los Toasts están completos y verificados.
 
 ---
 
@@ -141,9 +143,9 @@ description: "Task list for 003-home-billetera"
 
 **Purpose**: Auditoría automatizada de accesibilidad WCAG 2.1 AA, actualización documental y verificación integral de cumplimiento constitucional
 
-- [X] T022 [P] Ampliar `src/ui/features/home/HomeDashboard.test.tsx` y `src/App.test.tsx` con pruebas de accesibilidad `expectNoA11yViolations` (`axe-core`, Constitución 8.4 y SC-004) en el Dashboard Home inicial, con saldo oculto, con filtros aplicados y con el panel de acción rápida abierto
-- [X] T023 [P] Actualizar `README.md` en la raíz del proyecto documentando el Dashboard Home (`003-home-billetera`), el diseño único de Figma (`13:2`) con comportamiento Responsive (Desktop 2 paneles / Mobile 1 panel), el Toast Alert `"Próximamente"` en `Movimientos`, `Tarjetas` y `Mi Perfil`, y las referencias a `specs/003-home-billetera/` (Constitución 8.3)
-- [X] T024 Ejecutar `npm run verify` (`lint`, `format`, `typecheck`, `test:coverage` ≥ 80 %, `build`, `audit:deps`, `audit:licenses`, `scan:secrets`) y comprobar todos los escenarios de `specs/003-home-billetera/quickstart.md` (Constitución 9.4)
+- [X] T024 [P] Ampliar `src/ui/features/home/HomeDashboard.test.tsx` y `src/App.test.tsx` con pruebas de accesibilidad `expectNoA11yViolations` (`axe-core`, Constitución 8.4 y SC-004) en el Dashboard Home inicial, con saldo oculto, con filtros aplicados y con el panel de acción rápida abierto
+- [X] T025 [P] Actualizar `README.md` en la raíz del proyecto documentando el Dashboard Home (`003-home-billetera`), el diseño único de Figma (`13:2`) con comportamiento Responsive (Desktop 2 paneles / Mobile 1 panel), las notificaciones Toast `top-center` estilo `react-toastify` y el aviso `"Próximamente"` en `Movimientos`, `Tarjetas` y `Mi Perfil` (Constitución 8.3)
+- [X] T026 Ejecutar `npm run verify` (`lint`, `format`, `typecheck`, `test:coverage` ≥ 80 %, `build`, `audit:deps`, `audit:licenses`, `scan:secrets`) y comprobar todos los escenarios de `specs/003-home-billetera/quickstart.md` (Constitución 9.4)
 
 ---
 
@@ -156,7 +158,7 @@ description: "Task list for 003-home-billetera"
 - **User Story 1 (Phase 3 - P1 🎯 MVP)**: Depende de Foundational (Phase 2).
 - **User Story 2 (Phase 4 - P1)**: Depende de Foundational y amplía `wallet.ts`, `homeReducer.ts` y `HomeDashboard.tsx`.
 - **User Story 3 (Phase 5 - P2)**: Depende de US1/US2 al actualizar dinámicamente el saldo y la lista de movimientos en `HomeDashboard.tsx`.
-- **User Story 4 (Phase 6 - P1)**: Depende de la estructura base de `HomeDashboard.tsx` creada en US1.
+- **User Story 4 (Phase 6 - P1)**: Depende de la estructura base de `HomeDashboard.tsx` y del componente compartido `Toast.tsx`.
 - **Polish (Phase 7)**: Depende de la finalización de todas las historias de usuario (Phases 3–6).
 
 ### Parallel Opportunities
@@ -165,15 +167,16 @@ description: "Task list for 003-home-billetera"
 - **User Story 1 (Phase 3)**: Pruebas `T004` y `T005` en paralelo.
 - **User Story 2 (Phase 4)**: Pruebas `T010` y `T011` en paralelo.
 - **User Story 3 (Phase 5)**: Pruebas `T015` y `T016` en paralelo.
-- **Polish (Phase 7)**: `T022` y `T023` en paralelo antes de `T024`.
+- **User Story 4 (Phase 6)**: Pruebas `T020` y `T021` en paralelo; implementación `T022` (`Toast`) y `T023` (`HomeDashboard`) en paralelo.
+- **Polish (Phase 7)**: `T024` y `T025` en paralelo antes de `T026`.
 
 ---
 
-## Parallel Example: User Story 1 & 2 Domain + Reducer Tests
+## Parallel Example: User Story 4 Toast & Responsive Dashboard
 
 ```bash
-Task: "T004 [P] [US1] Pruebas unitarias de calculateWalletSummary y formatCurrency en src/domain/wallet.test.ts"
-Task: "T005 [P] [US1] Pruebas unitarias de initialHomeState y toggleBalancePrivacy en src/ui/features/home/homeReducer.test.ts"
+Task: "T020 [P] [US4] Pruebas unitarias de Toast top-center estilo react-toastify en src/ui/components/Toast/Toast.test.tsx"
+Task: "T021 [P] [US4] Pruebas de navegación y Toast Alert en Movimientos, Tarjetas y Mi Perfil en src/ui/features/home/HomeDashboard.test.tsx"
 ```
 
 ---
@@ -185,7 +188,7 @@ Task: "T005 [P] [US1] Pruebas unitarias de initialHomeState y toggleBalancePriva
 1. Completar **Phase 1: Setup** (`T001`) y **Phase 2: Foundational** (`T002`–`T003`).
 2. Completar **Phase 3: User Story 1** (`T004`–`T009`) para mostrar el Dashboard Home (`13:2`) tras iniciar sesión con saldo, ingresos, gastos, Kyn Card, privacidad de montos y cierre de sesión.
 3. Completar **Phase 4: User Story 2** (`T010`–`T014`) para habilitar el historial de movimientos con filtros dinámicos y búsqueda en tiempo real.
-4. Completar **Phase 6: User Story 4** (`T020`–`T021`) para garantizar el comportamiento Responsive libre de distorsión (Desktop 2 paneles / Mobile 1 solo panel de contenido-formulario) y el aviso Toast `"Próximamente"` en `Movimientos`, `Tarjetas` y `Mi Perfil`.
+4. Completar **Phase 6: User Story 4** (`T020`–`T023`) para garantizar el comportamiento Responsive libre de distorsión (Desktop 2 paneles / Mobile 1 solo panel de contenido-formulario) y las notificaciones Toast `top-center` estilo `react-toastify`.
 5. **DETENERSE Y VALIDAR**: Verificar los escenarios 1–4 y 9–11 de `quickstart.md`.
 
 ### Incremental Delivery
@@ -194,5 +197,5 @@ Task: "T005 [P] [US1] Pruebas unitarias de initialHomeState y toggleBalancePriva
 2. **US1 (P1)** → Resumen financiero, Kyn Card, privacidad de saldo y cierre de sesión.
 3. **US2 (P1)** → Movimientos recientes con filtros (`Todos`, `Ingresos`, `Gastos`) y buscador instantáneo.
 4. **US3 (P2)** → Acciones rápidas interactivas (`Recargar`, `Enviar`, `Recibir`, `Pagar`) con recálculo de saldo en vivo.
-5. **US4 (P1)** → Diseño único Figma (`13:2`), comportamiento Responsive sin distorsión (Desktop 2 paneles / Mobile 1 panel) y Toast Alert `"Próximamente"` en `Movimientos`, `Tarjetas` y `Mi Perfil`.
+5. **US4 (P1)** → Diseño único Figma (`13:2`), comportamiento Responsive sin distorsión (Desktop 2 paneles / Mobile 1 panel) y Toast Alert `top-center` estilo `react-toastify` con fondo de color de la paleta actual.
 6. **Polish** → Auditoría WCAG 2.1 AA con `axe-core`, documentación y `npm run verify`.

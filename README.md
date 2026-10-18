@@ -56,6 +56,7 @@ VITE_DEMO_USERS=[{"email":"tu.correo@example.com","password":"minimo-8-caractere
   - **Recibir**: presenta el alias KynWallet del titular y permite copiarlo al portapapeles con confirmación tipo **Toast** (`"Datos copiados al portapapeles"`).
 - **Movimientos recientes interactivos**: filtrado instantáneo por categoría (`Todos`, `Ingresos`, `Gastos`) y búsqueda en tiempo real por concepto o categoría (insensible a mayúsculas y tildes).
 - **Opciones `Movimientos`, `Tarjetas` y `Mi Perfil`**: envían exclusivamente una alerta tipo **Toast** (`role="status"`) con el mensaje `"Próximamente"`.
+- **Notificaciones Toast estilo `react-toastify` (`top-center`)**: todos los mensajes tipo Toast (`"Próximamente"`, `"Operación realizada con éxito"` y `"Datos copiados al portapapeles"`) se muestran flotantes en la **parte superior centrada (`top-center`)** con fondo de color de la paleta actual (`--brand-700` y `--success-700`), botón de cierre y barra de progreso temporal.
 - **Diseño único Figma (`13:2`) y comportamiento Responsive sin distorsión**: reproduce el prototipo de Figma `13:2` estructurado en **2 paneles en Desktop (`≥ 960px`: barra lateral + contenido)** y **1 solo panel en Mobile (`< 960px`, desde `320px`: solo formulario/contenido centrado)** sin distorsión al redimensionar la ventana.
 
 ## Scripts

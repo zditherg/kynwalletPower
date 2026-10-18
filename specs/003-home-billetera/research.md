@@ -21,10 +21,15 @@ Todas las decisiones técnicas, de diseño visual (basadas exclusivamente en el 
      - En `< 960px`, el contenedor principal se comporta como **1 solo panel vertical centrado** (`max-width: 540px`, sin paneles laterales fijos ni barras pegadas al borde inferior), presentando una cabecera compacta con las opciones de navegación en línea y apilando limpiamente en una sola columna las tarjetas de resumen, el formulario de acciones rápidas y la lista de movimientos recientes, garantizando cero distorsión durante el redimensionamiento continuo entre móvil, tablet y escritorio.
 - **Rationale**: Unificar la maquetación en torno al prototipo `13:2` con transición de 1 columna (`< 960px`) a 2 paneles (`≥ 960px`) elimina los cambios abruptos de `order` y `position: sticky; bottom: 0` que deformaban la interfaz al redimensionar la pantalla.
 
-## R3. Opciones `Movimientos`, `Tarjetas` y `Mi Perfil` con Toast Alert (`"Próximamente"`)
+## R3. Notificaciones Toast estilo `react-toastify` (`top-center` con fondo de color de la paleta actual)
 
-- **Decision**: Configurar los botones `"Movimientos"`, `"Tarjetas"` y `"Mi Perfil"` dentro de `<nav aria-label="Navegación principal">` para que al hacer clic disparen exclusivamente `showToast(MESSAGES.COMING_SOON)` (`"Próximamente"`), renderizando el componente reutilizable `Toast` (`src/ui/components/Toast/Toast.tsx`, `role="status"`, `aria-live="polite"`).
-- **Rationale**: Cumple exactamente el requerimiento del usuario (*"considera que las opciones Movimientos, Tarjetas y Mi Perfil del Dashboard solo envíen un mensaje de Próximamente utilizando Toast Alert"*) y reutiliza el componente `Toast` ya validado en `002-registro-billetera` (Constitución, Principio IV y 8.5).
+- **Decision**: Actualizar el componente compartido `src/ui/components/Toast/Toast.tsx` y `src/ui/components/Toast/Toast.module.css` para que todas las notificaciones Toast de la aplicación (en Registro y en el Dashboard Home) se comporten como `react-toastify` (`position="top-center"`, `theme="colored"`), sin añadir dependencias externas (Principio IV y sección 7 de la Constitución):
+  - **Posicionamiento superior centrado (`top-center`)**: `position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1000;` (`data-position="top-center"`), superpuesto sin desplazar ningún elemento del layout y adaptable desde `320px` (`max-width: min(420px, calc(100vw - 32px))`).
+  - **Fondo de color respetando la paleta actual (`tokens.css`) y WCAG 2.1 AA**:
+    - Tono corporativo `brand` (`background: var(--brand-700)` `#d04721`, texto `--neutral-0` `#ffffff`, ratio **4.56:1**) para avisos informativos como `"Próximamente"`.
+    - Tono semántico `success` (`background: var(--success-700)` `#166534`, texto `--neutral-0` `#ffffff`, ratio **7.13:1**) para confirmaciones de acciones como `"Operación realizada con éxito"` y `"Datos copiados al portapapeles"`.
+  - **anatomía interactiva estilo `react-toastify`**: icono semántico SVG, mensaje establecido intacto, botón de cierre inmediato (`aria-label="Cerrar notificación"`) y barra inferior animada de progreso temporal (`durationMs = 3000`).
+- **Rationale**: Satisface el requerimiento de mostrar todos los Toasts en la parte superior centrada con fondo de color de la paleta actual y comportamiento estilo `react-toastify`, manteniendo intactos los mensajes establecidos y cumpliendo el contraste WCAG 2.1 AA validado con `axe-core`.
 
 ## R4. Tokens semánticos y contraste WCAG 2.1 AA (Constitución 8.4)
 

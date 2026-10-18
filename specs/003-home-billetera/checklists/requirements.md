@@ -36,3 +36,4 @@
 - Se unifica el diseño de referencia exclusivamente en torno al prototipo de Figma `node-id=13-2` (`https://www.figma.com/design/f7uDsv8sh6ZOtK2OitTqtg/Billetera-Virtual---Prototipos?node-id=13-2`), descartando el prototipo `11:2`.
 - Se define explícitamente el comportamiento Responsive sin distorsiones: **Desktop (`≥ 960px`, 2 paneles: barra lateral + contenido)** y **Mobile (`< 960px`, desde `320px`, 1 solo panel: solo contenido/formulario del Dashboard)**.
 - Se especifica en **US4** y **FR-011** que las opciones **`Movimientos`**, **`Tarjetas`** y **`Mi Perfil`** envían únicamente el mensaje `"Próximamente"` mediante un **Toast Alert**.
+- Se especifica en **US4-4** y **FR-013** que todas las notificaciones **Toast** se muestran flotantes en la **parte superior centrada (`top-center`)** con fondo de color de la paleta actual y comportamiento estilo `react-toastify`, manteniendo intactos los textos de los mensajes establecidos.

@@ -153,7 +153,7 @@ describe('HomeDashboard · US3 Acciones rápidas dinámicas (Recargar, Enviar, R
 });
 
 describe('HomeDashboard · US4 Diseño Figma 13:2, Responsive 2 paneles/1 panel y Accesibilidad (SC-004)', () => {
-  it('US4-1 y US4-3: incluye navegación principal y las opciones Movimientos, Tarjetas y Mi Perfil muestran "Próximamente" mediante Toast Alert', async () => {
+  it('US4-1, US4-3 y US4-4: incluye navegación principal y las opciones Movimientos, Tarjetas y Mi Perfil muestran "Próximamente" mediante Toast Alert superior centrado (top-center)', async () => {
     const { user } = setup();
     const nav = screen.getByRole('navigation', { name: 'Navegación principal' });
     expect(within(nav).getByRole('button', { name: 'Inicio' })).toHaveAttribute(
@@ -163,7 +163,10 @@ describe('HomeDashboard · US4 Diseño Figma 13:2, Responsive 2 paneles/1 panel 
 
     for (const optionName of ['Movimientos', 'Tarjetas', 'Mi Perfil']) {
       await user.click(within(nav).getByRole('button', { name: optionName }));
-      expect(screen.getByRole('status')).toHaveTextContent('Próximamente');
+      const toast = screen.getByRole('status');
+      expect(toast).toHaveTextContent('Próximamente');
+      expect(toast).toHaveAttribute('data-position', 'top-center');
+      expect(toast).toHaveAttribute('data-tone', 'brand');
     }
   });
 
