@@ -5,40 +5,44 @@
   width: 100%;
   background: var(--surface-muted);
   color: var(--neutral-900);
+  box-sizing: border-box;
 }
 
-/* Navigation: Bottom bar on mobile (11:2), Left sidebar on desktop (13:2) */
+/* Mobile (< 960px): cabecera superior limpia + 1 solo panel centrado (solo formulario/contenido) */
+/* Desktop (≥ 960px): 2 paneles según Figma 13:2 (barra lateral izquierda + panel principal derecho) */
 .nav {
-  order: 2;
-  position: sticky;
-  bottom: 0;
-  z-index: 20;
+  width: 100%;
   display: flex;
   flex-direction: column;
+  gap: 12px;
   background: var(--neutral-0);
-  border-top: 1px solid var(--neutral-200);
-  padding: 8px 12px;
+  border-bottom: 1px solid var(--neutral-200);
+  padding: 16px 20px;
+  box-sizing: border-box;
 }
 
 .brandHeader {
-  display: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .brandMark {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   border-radius: var(--radius-sm);
   background: var(--brand-gradient);
   color: var(--neutral-0);
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 0.9375rem;
+  flex-shrink: 0;
 }
 
 .brandName {
-  font-size: 1.125rem;
+  font-size: 1.0625rem;
   font-weight: 700;
   color: var(--neutral-900);
   letter-spacing: -0.02em;
@@ -46,7 +50,7 @@
 
 .navList {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 6px;
   list-style: none;
   margin: 0;
@@ -60,7 +64,7 @@
   justify-content: center;
   gap: 8px;
   width: 100%;
-  min-height: 44px;
+  min-height: 40px;
   padding: 8px 10px;
   border-radius: var(--radius-sm);
   border: 1px solid transparent;
@@ -74,7 +78,7 @@
 }
 
 .navItem {
-  background: transparent;
+  background: var(--surface-muted);
   color: var(--neutral-700);
 }
 
@@ -88,17 +92,18 @@
   color: var(--neutral-0);
 }
 
-/* Workspace area */
+/* Panel principal de formulario y controles del Dashboard */
 .workspace {
-  order: 1;
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  padding: 20px 16px 32px;
-  max-width: 1200px;
+  gap: 20px;
   width: 100%;
+  max-width: 560px;
   margin: 0 auto;
+  padding: 24px 16px 40px;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .topBar {
@@ -106,7 +111,7 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 14px;
   background: var(--neutral-0);
   padding: 16px 20px;
   border-radius: var(--radius-md);
@@ -118,14 +123,16 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+  min-width: 0;
 }
 
 .greetingTitle {
   margin: 0;
-  font-size: 1.375rem;
+  font-size: 1.3125rem;
   font-weight: 700;
   color: var(--neutral-900);
   letter-spacing: -0.02em;
+  overflow-wrap: anywhere;
 }
 
 .greetingTitle:focus {
@@ -153,7 +160,7 @@
 /* Overview grid: Kyn Card + Financial Summary */
 .overviewGrid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: 20px;
 }
 
@@ -169,6 +176,7 @@
   background: var(--brand-gradient);
   color: var(--neutral-0);
   box-shadow: var(--shadow-card);
+  min-width: 0;
 }
 
 .cardHeader {
@@ -190,7 +198,7 @@
 .balanceValue {
   display: block;
   margin-top: 6px;
-  font-size: 2rem;
+  font-size: 1.875rem;
   font-weight: 700;
   line-height: 1.15;
   letter-spacing: -0.02em;
@@ -211,6 +219,7 @@
   font-size: 0.8125rem;
   font-weight: 600;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .privacyToggle:hover {
@@ -242,6 +251,7 @@
   font-weight: 700;
   letter-spacing: 0.06em;
   color: var(--neutral-0);
+  overflow-wrap: anywhere;
 }
 
 .cardNumber {
@@ -263,11 +273,12 @@
   background: var(--neutral-0);
   border: 1px solid var(--neutral-200);
   box-shadow: var(--shadow-sm);
+  min-width: 0;
 }
 
 .metricsRow {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
 }
 
@@ -278,6 +289,7 @@
   padding: 14px;
   border-radius: var(--radius-md);
   background: var(--surface-muted);
+  min-width: 0;
 }
 
 .metricLabel {
@@ -287,13 +299,13 @@
 }
 
 .metricIncome {
-  font-size: 1.25rem;
+  font-size: 1.1875rem;
   font-weight: 700;
   color: var(--success-700);
 }
 
 .metricExpense {
-  font-size: 1.25rem;
+  font-size: 1.1875rem;
   font-weight: 700;
   color: var(--error-600);
 }
@@ -307,6 +319,7 @@
 .ratioHeader {
   display: flex;
   justify-content: space-between;
+  gap: 8px;
   font-size: 0.8125rem;
   font-weight: 600;
   color: var(--neutral-700);
@@ -337,6 +350,7 @@
   background: var(--neutral-0);
   border: 1px solid var(--neutral-200);
   box-shadow: var(--shadow-sm);
+  min-width: 0;
 }
 
 .sectionTitle {
@@ -348,7 +362,7 @@
 
 .quickActionsGrid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
 }
 
@@ -359,7 +373,7 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  min-height: 76px;
+  min-height: 72px;
   padding: 12px;
   border-radius: var(--radius-md);
   font-family: inherit;
@@ -367,7 +381,6 @@
   font-weight: 600;
   cursor: pointer;
   transition:
-    transform 120ms ease,
     border-color 120ms ease,
     background-color 120ms ease;
 }
@@ -415,7 +428,7 @@
 
 .operationFormGrid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: 14px;
 }
 
@@ -449,6 +462,7 @@
   font-size: 1rem;
   font-weight: 700;
   color: var(--brand-700);
+  overflow-wrap: anywhere;
 }
 
 /* Transactions section */
@@ -503,7 +517,7 @@
 
 .searchInput {
   flex: 1;
-  min-width: 200px;
+  min-width: 180px;
   min-height: 40px;
   padding: 8px 14px;
   border-radius: var(--radius-sm);
@@ -551,6 +565,7 @@
   font-size: 0.9375rem;
   font-weight: 600;
   color: var(--neutral-900);
+  overflow-wrap: anywhere;
 }
 
 .txMeta {
@@ -591,9 +606,13 @@
   font-weight: 500;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 560px) {
+  .navList {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
   .quickActionsGrid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .operationFormGrid {
@@ -601,28 +620,23 @@
   }
 }
 
+/* Desktop (≥ 960px): 2 paneles según prototipo Figma 13:2 (Panel lateral + Panel de contenido) */
 @media (min-width: 960px) {
   .dashboard {
     display: grid;
-    grid-template-columns: 240px 1fr;
+    grid-template-columns: 260px minmax(0, 1fr);
+    align-items: stretch;
   }
 
   .nav {
-    order: 1;
-    position: sticky;
-    top: 0;
-    height: 100dvh;
+    border-bottom: none;
+    border-right: 1px solid var(--neutral-200);
     justify-content: flex-start;
     gap: 28px;
-    padding: 28px 16px;
-    border-top: none;
-    border-right: 1px solid var(--neutral-200);
+    padding: 32px 20px;
   }
 
   .brandHeader {
-    display: flex;
-    align-items: center;
-    gap: 10px;
     padding: 0 8px;
   }
 
@@ -631,19 +645,26 @@
     gap: 8px;
   }
 
+  .navItem {
+    background: transparent;
+  }
+
   .navItem,
   .navItemActive {
     justify-content: flex-start;
+    min-height: 44px;
     padding: 10px 14px;
     font-size: 0.9375rem;
   }
 
   .workspace {
-    order: 2;
+    max-width: 1120px;
+    margin: 0 auto;
     padding: 32px 36px;
+    gap: 24px;
   }
 
   .overviewGrid {
-    grid-template-columns: 1.25fr 1fr;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
   }
 }

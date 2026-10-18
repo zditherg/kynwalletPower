@@ -4,8 +4,7 @@ Demostración funcional, solo del lado del cliente, de las pantallas de **inicio
 
 - [01 · Login](https://www.figma.com/design/f7uDsv8sh6ZOtK2OitTqtg/Billetera-Virtual---Prototipos?node-id=2-2)
 - [02 · Registro](https://www.figma.com/design/f7uDsv8sh6ZOtK2OitTqtg/Billetera-Virtual---Prototipos?node-id=31-2)
-- [03 · Home Desktop (`13:2`)](https://www.figma.com/design/f7uDsv8sh6ZOtK2OitTqtg/Billetera-Virtual---Prototipos?node-id=13-2)
-- [03 · Home Mobile (`11:2`)](https://www.figma.com/design/f7uDsv8sh6ZOtK2OitTqtg/Billetera-Virtual---Prototipos?node-id=11-2)
+- [03 · Home / Dashboard (`13:2`)](https://www.figma.com/design/f7uDsv8sh6ZOtK2OitTqtg/Billetera-Virtual---Prototipos?node-id=13-2)
 
 Valida los campos en línea, permite registrar cuentas nuevas en `localStorage` del navegador (protegiendo la contraseña mediante hash `SHA-256`), simula la autenticación y habilita el panel de control financiero tras iniciar sesión, sin backend ni base de datos.
 
@@ -56,7 +55,8 @@ VITE_DEMO_USERS=[{"email":"tu.correo@example.com","password":"minimo-8-caractere
   - **Enviar** y **Pagar**: validan que el monto sea positivo y no supere el saldo disponible (`"Saldo insuficiente para realizar esta operación"`), descontando el importe y sumándolo a los gastos del mes.
   - **Recibir**: presenta el alias KynWallet del titular y permite copiarlo al portapapeles con confirmación tipo **Toast** (`"Datos copiados al portapapeles"`).
 - **Movimientos recientes interactivos**: filtrado instantáneo por categoría (`Todos`, `Ingresos`, `Gastos`) y búsqueda en tiempo real por concepto o categoría (insensible a mayúsculas y tildes).
-- **Diseño responsivo Dual**: reproduce el **Prototipo 1 Desktop (`13:2`)** en pantallas `≥ 960px` (barra de navegación lateral y rejilla multicolumna) y el **Prototipo 2 Mobile (`11:2`)** en pantallas `< 960px` (columna vertical y barra de navegación inferior).
+- **Opciones `Movimientos`, `Tarjetas` y `Mi Perfil`**: envían exclusivamente una alerta tipo **Toast** (`role="status"`) con el mensaje `"Próximamente"`.
+- **Diseño único Figma (`13:2`) y comportamiento Responsive sin distorsión**: reproduce el prototipo de Figma `13:2` estructurado en **2 paneles en Desktop (`≥ 960px`: barra lateral + contenido)** y **1 solo panel en Mobile (`< 960px`, desde `320px`: solo formulario/contenido centrado)** sin distorsión al redimensionar la ventana.
 
 ## Scripts
 

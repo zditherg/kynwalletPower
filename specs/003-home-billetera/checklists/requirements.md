@@ -2,6 +2,7 @@
 
 **Purpose**: Validate specification completeness and quality before proceeding to planning
 **Created**: 2026-10-17
+**Last Updated**: 2026-10-18
 **Feature**: [spec.md](../spec.md)
 
 ## Content Quality
@@ -31,6 +32,7 @@
 
 ## Notes
 
-- Validado en la iteración 1; los 16 criterios de calidad pasan satisfactoriamente.
-- Se contemplan explícitamente ambos prototipos de Figma proporcionados por el usuario: Prototipo 1 Desktop (`node-id=13-2`) y Prototipo 2 Mobile (`node-id=11-2`).
-- Los controles dinámicos y de impacto visual (ocultar/mostrar saldo, filtrado y búsqueda en tiempo real de movimientos, y acciones rápidas interactivas de Recargar, Enviar, Recibir y Pagar con actualización inmediata de saldos e historial) están definidos con criterios de aceptación verificables y alineados con la Constitución del proyecto.
+- Validado en la actualización del 2026-10-18; los 16 criterios de calidad pasan satisfactoriamente.
+- Se unifica el diseño de referencia exclusivamente en torno al prototipo de Figma `node-id=13-2` (`https://www.figma.com/design/f7uDsv8sh6ZOtK2OitTqtg/Billetera-Virtual---Prototipos?node-id=13-2`), descartando el prototipo `11:2`.
+- Se define explícitamente el comportamiento Responsive sin distorsiones: **Desktop (`≥ 960px`, 2 paneles: barra lateral + contenido)** y **Mobile (`< 960px`, desde `320px`, 1 solo panel: solo contenido/formulario del Dashboard)**.
+- Se especifica en **US4** y **FR-011** que las opciones **`Movimientos`**, **`Tarjetas`** y **`Mi Perfil`** envían únicamente el mensaje `"Próximamente"` mediante un **Toast Alert**.
